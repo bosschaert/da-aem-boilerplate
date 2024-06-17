@@ -121,3 +121,7 @@ indices:
         select: head > meta[name="product"]
         value: |
           attribute(el, "content")
+      offtime:
+        select: head > meta[name="offtime"]
+        value: |
+          attribute(el, "content")
