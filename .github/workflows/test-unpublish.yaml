@@ -14,12 +14,14 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: cd ${RUNNER_WORKSPACE} && find .
-    # - run: find .
-    - run: env | sort
-    - run: pwd
-    - run: node .github/workflows/node/schedule-unpublish.js one two three
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: cd ${RUNNER_WORKSPACE} && find .
+      # - run: find .
+      - run: env | sort
+      - run: pwd
+      - run: node .github/workflows/node/schedule-unpublish.js one two three
