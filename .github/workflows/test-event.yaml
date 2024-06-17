@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Status: ${{ github.event.client_payload.status }}"
-        echo "Path: ${{ github.event.client_payload.path }}"
+        true "${{ github.event.client_payload.path }}"
+        # echo "Status: ${{ github.event.client_payload.status }}"
+        # echo "Path: ${{ github.event.client_payload.path }}"
 
   # slack:
   #   runs-on: ubuntu-latest
