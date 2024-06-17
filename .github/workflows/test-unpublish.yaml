@@ -18,6 +18,5 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: node --version
     - run: node node/schedule-unpublish.js one two three
