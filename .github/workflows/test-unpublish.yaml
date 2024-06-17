@@ -1,0 +1,23 @@
+name: Unpublish expired events
+
+on:
+  repository_dispatch:
+    types:
+      - resource-published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: node --version
+    - run: node node/schedule-unpublish.js one two three
