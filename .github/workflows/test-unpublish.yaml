@@ -19,4 +19,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: node --version
-    - run: node node/schedule-unpublish.js one two three
+    - run: node .github/workflows/node/schedule-unpublish.js one two three
