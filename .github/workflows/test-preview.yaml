@@ -1,9 +1,8 @@
 name: Test Preview
 on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0/15 * * * *'
-
+  repository_dispatch:
+    types:
+      - resource-previewed
 jobs:
   print:
     runs-on: ubuntu-latest
