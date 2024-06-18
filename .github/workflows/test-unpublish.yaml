@@ -1,9 +1,10 @@
 name: Unpublish expired events
 
 on:
-  repository_dispatch:
-    types:
-      - resource-published
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # every 15 mins
+    - cron:  '0/15 * * * *'
 
 jobs:
   build:
@@ -21,4 +22,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: env | sort
-      - run: node .github/workflows/node/schedule-unpublish.js one two three
+      - run: node .github/workflows/node/schedule-unpublish.js
