@@ -3,8 +3,7 @@ name: Unpublish expired events
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    # every 15 mins
-    - cron:  '0/15 * * * *'
+    - cron:  '0/5 * * * *'
 
 jobs:
   build:
