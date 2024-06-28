@@ -12,4 +12,4 @@ export default class DaTagSelector extends LitElement {
   }
 }
 
-customElements.define('da-tag-selector', DaEditor);
+customElements.define('da-tag-selector', DaTagSelector);
