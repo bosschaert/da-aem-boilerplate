@@ -7,18 +7,18 @@ export default class DaTagSelector extends LitElement {
   };
 
   getTagURL() {
-    const host = this.project.ref === 'local'
-      ? 'http://localhost:3000'
-      : `https://${this.project.ref}--${this.project.repo}--${this.project.org}.hlx.live`;
-
-    const url = `${host}/data/producttags.json`;
-    return url;
+    return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/data/producttags.json`
   }
 
   async fetchTags() {
     const url = this.getTagURL();
-    console.log('Fetching', url);
-    const resp = await fetch(url);
+
+    const opts = {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    }
+    const resp = await fetch(url, opts);
     const tagData = await resp.json();
 
     const categories = new Map();
