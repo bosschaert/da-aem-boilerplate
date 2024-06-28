@@ -1,5 +1,5 @@
 // import { LitElement } from '/deps/lit/lit-core.min.js';
-import { LitElement } from 'https://da.live/deps/lit/lit-core.min.js';
+import { LitElement, html } from 'https://da.live/deps/lit/lit-core.min.js';
 
 export default class DaTagSelector extends LitElement {
   static properties = {
