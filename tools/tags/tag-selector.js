@@ -9,7 +9,7 @@ export default class DaTagSelector extends LitElement {
 
   render() {
     return html`<h2>From the tag selector</h2>
-      <p>Project: ${this.project}</p>
+      <p>Project: ${JSON.stringify(this.project)}</p>
       <p>Token: ${this.token}</p>
     `;
   }
