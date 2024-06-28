@@ -8,7 +8,10 @@ export default class DaTagSelector extends LitElement {
   };
 
   render() {
-    return html`<h2>From the tag selector</h2>`;
+    return html`<h2>From the tag selector</h2>
+      <p>Project: ${this.project}</p>
+      <p>Token: ${this.token}</p>
+    `;
   }
 }
 
