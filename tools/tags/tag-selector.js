@@ -10,7 +10,7 @@ export default class DaTagSelector extends LitElement {
     datasource: { type: String },
     iscategory: { type: Boolean },
     displayName: { type: String },
-    parentDataSource: { type: String },
+    parent: { type: Object },
   };
 
   connectedCallback() {
@@ -38,8 +38,6 @@ export default class DaTagSelector extends LitElement {
         sel.parentNode.removeChild(sel);
       };
     } else {
-      console.log('TT clicked', e.target.innerText);
-
       navigator.clipboard.writeText(tagtext).then(function() {
         console.log('Async: Copying to clipboard was successful!');
         const sd = document.querySelector('#copy-status');
@@ -58,6 +56,10 @@ export default class DaTagSelector extends LitElement {
         sel.parentNode.removeChild(sel);
       }
     }
+  }
+
+  cl(e) {
+    console.log('Clicked: ', e.target.value);
   }
 
   async fetchTags() {
@@ -90,9 +92,13 @@ export default class DaTagSelector extends LitElement {
         ? html``
         : html`<span class="up" @click="${this.upClicked}">↑</span> `;
 
+      const li = this.iscategory
+        ? html`${v.map((tag) => html`<li @click="${this.tagClicked}">${tag}</li>`)}`
+        : html`${v.map((tag) => html`<li><label><input type="checkbox" value="${tag}" @click="${this.tagClicked}">${tag}</label></li>`)}`
+
       const el = html`<h2>${uplink}${this.displayName}</h2>
       <ul>
-        ${v.map((tag) => html`<li @click="${this.tagClicked}">${tag}</li>`)}
+        ${li}
       </ul>`
       tagLists.push(el);
     });
