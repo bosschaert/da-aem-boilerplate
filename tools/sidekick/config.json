@@ -3,7 +3,7 @@
   "plugins": [
     {
       "id": "jmptags",
-      "title": "JMP Tags",
+      "title": "JMPTags",
       "environments": ["edit"],
       "daLibrary": true,
       "url": "https://da.live/plugin/bosschaert/da-aem-boilerplate/local/tools/tags"
