@@ -2,11 +2,11 @@
   "project": "DA Block Collection",
   "plugins": [
     {
-      "id": "tags",
-      "title": "Tags",
+      "id": "mytags",
+      "title": "MyTags",
       "environments": ["edit"],
       "daLibrary": true,
-      "url": "https://da.live/plugin/adobecom/bacom-sandbox/main/tools/tags"
+      "url": "https://da.live/plugin/bosschaert/da-aem-boilerplate/main/tools/tags"
     }
   ]
 }
