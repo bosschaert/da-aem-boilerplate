@@ -7,7 +7,8 @@ export default class DaTagSelector extends LitElement {
   };
 
   getTagURL() {
-    return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/data/producttags.json`
+    return `https://main--${this.project.repo}--${this.project.org}.hlx.page/data/producttags.json`
+    // return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/data/producttags.json`
   }
 
   async fetchTags() {
