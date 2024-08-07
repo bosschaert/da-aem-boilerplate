@@ -10,16 +10,15 @@ export default class DaTagSelector extends LitElement {
     datasource: { type: String },
     iscategory: { type: Boolean },
     displayName: { type: String },
+    parentDataSource: { type: String },
   };
 
-  // static styles = [sheet];
   connectedCallback() {
     super.connectedCallback();
     this.shadowRoot.adoptedStyleSheets = [sheet];
   }
 
   getTagURL() {
-    // return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/tools/tagbrowser/tag-categories.json`
     return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/${this.datasource}`
   }
 
@@ -34,6 +33,7 @@ export default class DaTagSelector extends LitElement {
         ts.token = sel.token;
         ts.datasource = `tools/tagbrowser/${tagtext.toLowerCase()}.json`;
         ts.displayName = tagtext;
+        ts.parent = sel;
         sel.parentNode.appendChild(ts);
         sel.parentNode.removeChild(sel);
       };
@@ -47,6 +47,16 @@ export default class DaTagSelector extends LitElement {
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
+    }
+  }
+
+  upClicked() {
+    const sel = document.querySelector('da-tag-selector');
+    if (sel) {
+      if (sel.parent) {
+        sel.parentNode.appendChild(sel.parent);
+        sel.parentNode.removeChild(sel);
+      }
     }
   }
 
@@ -76,8 +86,11 @@ export default class DaTagSelector extends LitElement {
     const tagLists = [];
     categories.forEach((v, k) => {
       this.iscategory = k.toLowerCase() === 'category';
+      const uplink = this.iscategory
+        ? html``
+        : html`<span class="up" @click="${this.upClicked}">↑</span> `;
 
-      const el = html`<h2>${this.displayName}</h2>
+      const el = html`<h2>${uplink}${this.displayName}</h2>
       <ul>
         ${v.map((tag) => html`<li @click="${this.tagClicked}">${tag}</li>`)}
       </ul>`
@@ -94,11 +107,6 @@ export default class DaTagSelector extends LitElement {
     return html`
       ${this.listTags()}
     `;
-    //   <br>
-    //   <small>List obtained from: ${this.getTagURL()}</small>
-    //   <br>
-    //   <small>Project: ${JSON.stringify(this.project)}</small>
-    // `;
   }
 }
 

@@ -21,3 +21,7 @@ li {
   color: #4D7BFF;
   cursor: pointer;
 }
+
+span.up {
+  cursor: pointer;
+}
