@@ -1,10 +1,23 @@
-h2 {
-  color: orange;
+:host > p {
+  margin: 0;
 }
 
-#copy-status {
-  color: green;
-  position: absolute;
-  top: 0;
-  right: 0;
+h2, li {
+  font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
+}
+
+h2 {
+  color: #676767;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 4px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  color: #4D7BFF;
+  cursor: pointer;
 }

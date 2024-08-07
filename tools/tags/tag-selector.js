@@ -43,7 +43,7 @@ export default class DaTagSelector extends LitElement {
       navigator.clipboard.writeText(tagtext).then(function() {
         console.log('Async: Copying to clipboard was successful!');
         const sd = document.querySelector('#copy-status');
-        sd.style.display = 'block';
+        sd.style.opacity = '1';
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
