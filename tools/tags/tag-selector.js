@@ -1,14 +1,53 @@
 import { LitElement, html, until } from 'https://da.live/deps/lit/lit-all.min.js';
+import getSheet from 'https://da.live/blocks/shared/sheet.js';
+
+const sheet = await getSheet('/tools/tags/tag-selector.css');
 
 export default class DaTagSelector extends LitElement {
   static properties = {
     project: { type: String },
     token: { type: String },
+    datasource: { type: String },
+    iscategory: { type: Boolean },
+    displayName: { type: String },
   };
 
+  // static styles = [sheet];
+  connectedCallback() {
+    super.connectedCallback();
+    this.shadowRoot.adoptedStyleSheets = [sheet];
+  }
+
   getTagURL() {
-    return `https://main--${this.project.repo}--${this.project.org}.hlx.page/data/producttags.json`
-    // return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/data/producttags.json`
+    // return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/tools/tagbrowser/tag-categories.json`
+    return `https://admin.da.live/source/${this.project.org}/${this.project.repo}/${this.datasource}`
+  }
+
+  tagClicked(e) {
+    const tagtext = e.target.innerText;
+
+    if (this.iscategory) {
+      const sel = document.querySelector('da-tag-selector');
+      if (sel) {
+        const ts = document.createElement('da-tag-selector');
+        ts.project = sel.project;
+        ts.token = sel.token;
+        ts.datasource = `tools/tagbrowser/${tagtext.toLowerCase()}.json`;
+        ts.displayName = tagtext;
+        sel.parentNode.appendChild(ts);
+        sel.parentNode.removeChild(sel);
+      };
+    } else {
+      console.log('TT clicked', e.target.innerText);
+
+      navigator.clipboard.writeText(tagtext).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+        const sd = document.querySelector('#copy-status');
+        sd.style.display = 'block';
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+    }
   }
 
   async fetchTags() {
@@ -36,9 +75,11 @@ export default class DaTagSelector extends LitElement {
 
     const tagLists = [];
     categories.forEach((v, k) => {
-      const el = html`<h2>${k}</h2>
+      this.iscategory = k.toLowerCase() === 'category';
+
+      const el = html`<h2>${this.displayName}</h2>
       <ul>
-        ${v.map((tag) => html`<li>${tag}</li>`)}
+        ${v.map((tag) => html`<li @click="${this.tagClicked}">${tag}</li>`)}
       </ul>`
       tagLists.push(el);
     });
@@ -52,11 +93,12 @@ export default class DaTagSelector extends LitElement {
   render() {
     return html`
       ${this.listTags()}
-      <br>
-      <small>List obtained from: ${this.getTagURL()}</small>
-      <br>
-      <small>Project: ${JSON.stringify(this.project)}</small>
     `;
+    //   <br>
+    //   <small>List obtained from: ${this.getTagURL()}</small>
+    //   <br>
+    //   <small>Project: ${JSON.stringify(this.project)}</small>
+    // `;
   }
 }
 

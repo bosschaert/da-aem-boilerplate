@@ -9,5 +9,8 @@ import './tag-selector.js';
   const tagSelector = document.createElement('da-tag-selector');
   tagSelector.project = project;
   tagSelector.token = token;
+  tagSelector.datasource = 'tools/tagbrowser/tag-categories.json';
+  tagSelector.iscategory = true;
+  tagSelector.displayName = 'Categories';
   document.body.append(tagSelector);
 }());

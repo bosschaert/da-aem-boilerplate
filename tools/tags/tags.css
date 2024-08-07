@@ -1,0 +1,7 @@
+#copy-status {
+  display: none;
+  color: green;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
