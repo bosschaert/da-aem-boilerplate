@@ -23,9 +23,8 @@ export default class DaTagSelector extends LitElement {
   }
 
   tagClicked(e) {
-    const tagtext = e.target.innerText;
-
     if (this.iscategory) {
+      const tagtext = e.target.innerText;
       const sel = document.querySelector('da-tag-selector');
       if (sel) {
         const ts = document.createElement('da-tag-selector');
@@ -38,13 +37,22 @@ export default class DaTagSelector extends LitElement {
         sel.parentNode.removeChild(sel);
       };
     } else {
-      navigator.clipboard.writeText(tagtext).then(function() {
-        console.log('Async: Copying to clipboard was successful!');
-        const sd = document.querySelector('#copy-status');
-        sd.style.opacity = '1';
-      }, function(err) {
-        console.error('Async: Could not copy text: ', err);
-      });
+      const form = e.target.form;
+      if (form) {
+        const values = [];
+        for (const item of form.elements) {
+          if (item.checked) {
+            values.push(item.value);
+          }
+        }
+        const vl = values.join(', ');
+        navigator.clipboard.writeText(vl).then(function() {
+          const sd = document.querySelector('#copy-status');
+          sd.style.opacity = '1';
+        }, function(err) {
+          console.error('Async: Could not copy text: ', err);
+        });
+      }
     }
   }
 
@@ -52,6 +60,9 @@ export default class DaTagSelector extends LitElement {
     const sel = document.querySelector('da-tag-selector');
     if (sel) {
       if (sel.parent) {
+        const sd = document.querySelector('#copy-status');
+        sd.style.opacity = '0';
+
         sel.parentNode.appendChild(sel.parent);
         sel.parentNode.removeChild(sel);
       }
@@ -97,16 +108,16 @@ export default class DaTagSelector extends LitElement {
         : html`${v.map((tag) => html`<li><label><input type="checkbox" value="${tag}" @click="${this.tagClicked}">${tag}</label></li>`)}`
 
       const el = html`<h2>${uplink}${this.displayName}</h2>
-      <ul>
+      <ul><form>
         ${li}
-      </ul>`
+      </form></ul>`
       tagLists.push(el);
     });
     return tagLists;
   }
 
   listTags() {
-    return html`<p>${until(this.fetchTags(), html`Fetching tags...</p>`)}`;
+    return html`${until(this.fetchTags(), html`<p><em>Fetching tags...</em></p>`)}`;
   }
 
   render() {

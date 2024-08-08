@@ -2,7 +2,7 @@
   margin: 0;
 }
 
-h2, li {
+h2, li, p {
   font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
 }
 
@@ -17,11 +17,20 @@ ul {
   list-style-type: none;
 }
 
-li {
+li, li * {
   color: #4D7BFF;
   cursor: pointer;
 }
 
+li input {
+  margin-right: 8px;
+  vertical-align: bottom;
+}
+
 span.up {
   cursor: pointer;
+}
+
+em {
+  color: lightgrey;
 }
