@@ -37,19 +37,23 @@ export default class DaTagSelector extends LitElement {
         sel.parentNode.removeChild(sel);
       };
     } else {
-      const form = e.target.form;
+      // const form = null;//e.target.form;
+      const { target: { form } } = e;
       if (form) {
         const values = [];
+
+        // eslint-disable-next-line no-restricted-syntax
         for (const item of form.elements) {
           if (item.checked) {
             values.push(item.value);
           }
         }
         const vl = values.join(', ');
-        navigator.clipboard.writeText(vl).then(function() {
+        navigator.clipboard.writeText(vl).then(() => {
           const sd = document.querySelector('#copy-status');
           sd.style.opacity = '1';
-        }, function(err) {
+        }, (err) => {
+          // eslint-disable-next-line no-console
           console.error('Async: Could not copy text: ', err);
         });
       }
