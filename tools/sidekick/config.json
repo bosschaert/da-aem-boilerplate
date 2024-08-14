@@ -3,10 +3,17 @@
   "plugins": [
     {
       "id": "jmptags",
-      "title": "JMPTags",
+      "title": "JMP Tags",
       "environments": ["edit"],
       "daLibrary": true,
       "url": "https://da.live/plugin/bosschaert/da-aem-boilerplate/local/tools/tags"
+    },
+    {
+      "id": "datepicker",
+      "title": "Date Picker",
+      "environments": ["edit"],
+      "daLibrary": true,
+      "url": "https://da.live/plugin/bosschaert/da-aem-boilerplate/local/tools/datepicker"
     }
   ]
 }
