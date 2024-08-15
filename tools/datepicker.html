@@ -15,12 +15,14 @@
     <form id="typeselect">
       <label><input type="radio" name="date-picker" value="date">Date</label>
       <label><input type="radio" name="date-picker" value="datetime" checked>Date + Time</label>
+      <!--
       <label><input type="radio" name="date-picker" value="time">Time</label>
+      -->
     </form>
     <form id="picker">
       <div id="date-time">
-        <input type="date" id="date-picker" name="date-picker">
-        <input type="time" id="time-picker" name="time-picker">
+        <input type="date" id="date-picker" name="date-picker" required>
+        <input type="time" id="time-picker" name="time-picker" required>
       </div>
       <select name="time-picker" id="time-zone"></select>
       <button id="use"">Copy</button>

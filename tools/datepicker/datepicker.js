@@ -58,15 +58,21 @@ function typeChange(e) {
   }
   document.querySelectorAll('form#picker input[type=date]').forEach((date) => {
     date.hidden = !hasDate;
+    date.required = hasDate;
   });
   document.querySelectorAll('form#picker [name=time-picker]').forEach((time) => {
     time.hidden = !hasTime;
+    time.required = hasTime;
   });
 }
 
 function useButtonClicked(e) {
-  // console.log('Use button clicked');
   e.preventDefault();
+
+  const form = document.querySelector('form#picker');
+  if (!form.reportValidity()) {
+    return;
+  }
 
   const inputType = document.querySelector('form#typeselect input[name="date-picker"]:checked').value;
   let seldate = '';
@@ -79,14 +85,21 @@ function useButtonClicked(e) {
   if (inputType.includes('time')) {
     seltime = document.querySelector('form#picker input[type=time]').value;
     seltz = document.querySelector('form#picker select#time-zone').value;
+  } else {
+    console.log('Date result', seldate);
+    return;
   }
 
   const d = new Date(`${seldate}T${seltime}${seltz}`);
 
-  const result = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}Z`;
+  const result = d.toISOString();
+  const cIdx = result.lastIndexOf(':');
+  const result2 = result.substring(0, cIdx);
+  const result3 = result2.replace('T', ' ');
+  const result4 = `${result3}Z`;
 
   console.log('input:', seldate, seltime, seltz, d.toISOString());
-  console.log('result: ', result);
+  console.log('result: ', result4);
 }
 
 function initControls() {
