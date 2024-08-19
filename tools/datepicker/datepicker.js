@@ -1,8 +1,4 @@
-// Import SDK
-// import DA_SDK from 'https://da.live/nx/utils/sdk.js';
-
-// Import Web Component
-// import './tag-selector.js';
+import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 
 function initTimeZones() {
   const select = document.getElementById('time-zone');
@@ -112,7 +108,14 @@ function initControls() {
   });
 }
 
+// (async function init() {
+//   initControls();
+//   initTimeZones();
+// }());
+
+
 (async function init() {
-  initControls();
-  initTimeZones();
+  const { context, token, actions } = await DA_SDK;
+  actions.sendText('Send text and close');
+  actions.closeLibrary();
 }());
