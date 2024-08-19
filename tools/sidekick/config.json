@@ -13,8 +13,7 @@
       "title": "DatePicker",
       "environments": ["da-edit"],
       "daLibrary": true,
-      "xurl": "https://da.live/plugin/bosschaert/da-aem-boilerplate/local/tools/datepicker",
-      "url": "https://dtpicker--da-aem-boilerplate--bosschaert.hlx.live/tools/datepicker.html"
+      "url": "https://local--da-aem-boilerplate--bosschaert.hlx.live/tools/datepicker.html"
     }
   ]
 }
