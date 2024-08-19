@@ -5,19 +5,13 @@
       "id": "jmptags",
       "title": "JMP Tags",
       "environments": ["da-edit"],
-      "url": "http://localhost:3000/tools/tags.html"
+      "path": "/tools/tags.html"
     },
     {
       "id": "datepicker",
       "title": "Date Picker",
       "environments": ["da-edit"],
-      "url": "http://localhost:3000/tools/datepicker.html"
-    },
-    {
-      "id": "da-plugin-demo",
-      "title": "Plugin demo",
-      "environments": ["da-edit"],
-      "url": "https://main--da-block-collection--aemsites.hlx.live/tools/demo/demo.html"
+      "path": "/tools/datepicker.html"
     }
   ]
 }
