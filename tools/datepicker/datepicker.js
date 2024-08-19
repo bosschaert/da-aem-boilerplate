@@ -108,14 +108,14 @@ function initControls() {
   });
 }
 
-// (async function init() {
-//   initControls();
-//   initTimeZones();
-// }());
-
-
 (async function init() {
-  const { context, token, actions } = await DA_SDK;
-  actions.sendText('Send text and close');
-  actions.closeLibrary();
+  initControls();
+  initTimeZones();
 }());
+
+
+// (async function init() {
+//   const { context, token, actions } = await DA_SDK;
+//   actions.sendText('Send text and close');
+//   actions.closeLibrary();
+// }());
