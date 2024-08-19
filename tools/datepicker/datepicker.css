@@ -26,15 +26,3 @@ input, label, select, button {
 #time-zone {
   width: 100% - 8px;
 }
-
-#invalid {
-  color: green;
-  position: absolute;
-  top: 0;
-  right: 10px;
-  opacity: 0;
-  transition: opacity 1s;
-  font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-}

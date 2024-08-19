@@ -13,7 +13,6 @@ function initTimeZones() {
     }
     const timeZoneAbbrivation = new Intl.DateTimeFormat('en', { timeZone, timeZoneName: 'long' })
       .formatToParts().find((part) => part.type === 'timeZoneName').value;
-    // return `${timeZone} - ${timeZoneAbbrivation}(${offset})`;
     const tz = `(${offset}) ${timeZoneAbbrivation}`;
     if (timeZone === curTZ) {
       defTZ = tz;
@@ -62,7 +61,7 @@ function typeChange(e) {
   });
 }
 
-function useButtonClicked(e) {
+function useButtonClicked(e, actions) {
   e.preventDefault();
 
   const form = document.querySelector('form#picker');
@@ -82,7 +81,8 @@ function useButtonClicked(e) {
     seltime = document.querySelector('form#picker input[type=time]').value;
     seltz = document.querySelector('form#picker select#time-zone').value;
   } else {
-    console.log('Date result', seldate);
+    actions.sendText(seldate);
+    actions.closeLibrary();
     return;
   }
 
@@ -94,28 +94,23 @@ function useButtonClicked(e) {
   const result3 = result2.replace('T', ' ');
   const result4 = `${result3}Z`;
 
-  console.log('input:', seldate, seltime, seltz, d.toISOString());
-  console.log('result: ', result4);
+  actions.sendText(result4);
+  actions.closeLibrary();
 }
 
-function initControls() {
+function initControls(actions) {
   document.querySelectorAll('form#typeselect input[type=radio]').forEach((radio) => {
     radio.addEventListener('change', typeChange);
   });
 
   document.querySelectorAll('button#use').forEach((button) => {
-    button.onclick = useButtonClicked;
+    button.onclick = (e) => useButtonClicked(e, actions);
   });
 }
 
 (async function init() {
-  initControls();
+  const { actions } = await DA_SDK;
+
+  initControls(actions);
   initTimeZones();
 }());
-
-
-// (async function init() {
-//   const { context, token, actions } = await DA_SDK;
-//   actions.sendText('Send text and close');
-//   actions.closeLibrary();
-// }());
