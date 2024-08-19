@@ -186,7 +186,7 @@ describe('Tag Selector Plugin Tests', () => {
 
     const savedFetch = window.fetch;
     try {
-      window.fetch = async (url, opts) => {
+      window.fetch = async (url) => {
         if (url === 'https://admin.da.live/source/jmphlx/jmp-da/tools/tagbrowser/mytags.json') {
           return fetchResp;
         }

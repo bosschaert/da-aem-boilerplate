@@ -1,7 +1,7 @@
 import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 
-function initTimeZones() {
-  const select = document.getElementById('time-zone');
+export function initTimeZones(doc = document) {
+  const select = doc.getElementById('time-zone');
 
   let defTZ = '';
   const curTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -22,7 +22,7 @@ function initTimeZones() {
   const tzSet = Array.from(new Set(timezonesWithoffsets)).sort();
 
   tzSet.forEach((tz) => {
-    const opt = document.createElement('option');
+    const opt = doc.createElement('option');
     opt.textContent = tz;
 
     const delta = tz.substring(4, tz.indexOf(')'));
@@ -61,7 +61,7 @@ function typeChange(e) {
   });
 }
 
-function useButtonClicked(e, actions) {
+export function useButtonClicked(e, actions) {
   e.preventDefault();
 
   const form = document.querySelector('form#picker');
