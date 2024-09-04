@@ -15,10 +15,10 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
-(async function daPreview() {
-  const { searchParams } = new URL(window.location.href);
-  if (searchParams.get('dapreview') === 'on') import('./dapreview.js');
-}());
+// (async function daPreview() {
+//   const { searchParams } = new URL(window.location.href);
+//   if (searchParams.get('dapreview') === 'on') import('./dapreview.js');
+// }());
 
 /**
  * Builds hero block and prepends to main in a new section.
