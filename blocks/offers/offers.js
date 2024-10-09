@@ -34,10 +34,10 @@ function conditionsMatch(doc, conditions) {
   return true;
 }
 
-function docMatches(doc, offers) {
+function docMatches(doc, filters) {
   // eslint-disable-next-line no-restricted-syntax
-  for (const offer of offers[':names']) {
-    if (conditionsMatch(doc, offers[offer]?.data)) return true;
+  for (const filter of filters[':names']) {
+    if (conditionsMatch(doc, filters[filter]?.data)) return true;
   }
   return false;
 }
@@ -45,16 +45,16 @@ function docMatches(doc, offers) {
 export default async function decorate(block) {
   const config = readBlockConfig(block);
 
-  const filterDoc = `${window.location.origin}${config.filter}`;
-  const offersDoc = await fetch(filterDoc);
-  const offers = await offersDoc.json();
+  const filterDocURL = `${window.location.origin}${config.filter}`;
+  const filterDoc = await fetch(filterDocURL);
+  const filters = await filterDoc.json();
 
   const indexDoc = await fetch(`${window.location.origin}/query-index.json`);
   const index = await indexDoc.json();
 
   const matching = [];
   index?.data.forEach((doc) => {
-    if (docMatches(doc, offers)) {
+    if (docMatches(doc, filters)) {
       matching.push(doc);
     }
   });
