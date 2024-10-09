@@ -49,8 +49,7 @@ export default async function decorate(block) {
   const offersDoc = await fetch(filterDoc);
   const offers = await offersDoc.json();
 
-  // TODO get from real index
-  const indexDoc = await fetch(`${window.location.origin}/filtering/qindex.json`);
+  const indexDoc = await fetch(`${window.location.origin}/query-index.json`);
   const index = await indexDoc.json();
 
   const matching = [];

@@ -4,7 +4,7 @@ indices:
       - /**
     target: /query-index.json
     properties:
-      title:
+      category:
         select: head > meta[name="category"]
         value: attribute(el, "content")
       price:
