@@ -13,6 +13,8 @@ function conditionMatches(doc, condition) {
   const lcCond = lowercaseObj(condition);
 
   switch (lcCond.operator) {
+    // Use quote 'equals' sign here because the = character has special
+    // meaning in the spreadsheet and cannot be entered on its own.
     case '\'=\'':
       return lcDoc[lcCond.property?.toLowerCase()] === lcCond.value;
     case '<':
